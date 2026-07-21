@@ -65,6 +65,10 @@ ENV=prod ./bin/server
 
 The binary is fully self-contained — copy it to the server and run it. Configuration via env vars (see `.env.example`).
 
+### Deploy to Vercel
+
+The repo also works on Vercel as a single serverless function: `vercel.json` rewrites every route to `api/index.go`, which serves the same mux as the binary (embedded assets, no SQLite — the serverless filesystem is read-only). Just push; no build command or env vars needed. Remember to commit `web/static/css/output.css` after running `make css`, since Vercel does not run the Tailwind build.
+
 ## Make targets
 
 Run `make help` to list them: `dev`, `run`, `build`, `css`, `css-watch`, `tailwind`, `htmx` (update vendored htmx), `test`, `tidy`, `clean`.
