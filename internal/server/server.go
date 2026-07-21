@@ -6,11 +6,11 @@ import (
 	"io/fs"
 	"net/http"
 
-	"github.com/maxroth/eumel/internal/config"
-	"github.com/maxroth/eumel/internal/handlers"
-	"github.com/maxroth/eumel/internal/i18n"
-	"github.com/maxroth/eumel/internal/view"
-	"github.com/maxroth/eumel/web"
+	"handler/internal/config"
+	"handler/internal/handlers"
+	"handler/internal/i18n"
+	"handler/internal/view"
+	"handler/web"
 )
 
 func New(cfg *config.Config, database *sql.DB, v *view.View, tr *i18n.Translator) http.Handler {

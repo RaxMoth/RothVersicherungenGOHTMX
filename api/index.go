@@ -9,10 +9,10 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/maxroth/eumel/internal/config"
-	"github.com/maxroth/eumel/internal/i18n"
-	"github.com/maxroth/eumel/internal/server"
-	"github.com/maxroth/eumel/internal/view"
+	"handler/internal/config"
+	"handler/internal/i18n"
+	"handler/internal/server"
+	"handler/internal/view"
 )
 
 var (

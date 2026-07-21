@@ -6,8 +6,8 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/maxroth/eumel/internal/i18n"
-	"github.com/maxroth/eumel/internal/view"
+	"handler/internal/i18n"
+	"handler/internal/view"
 )
 
 // Language resolves the request language, stores it on the context and

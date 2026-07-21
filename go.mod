@@ -1,4 +1,7 @@
-module github.com/maxroth/eumel
+// The module is named "handler" because Vercel's Go builder rewrites
+// the module path to that when compiling api/index.go — any other name
+// breaks the internal/ imports on deploy. Do not rename.
+module handler
 
 go 1.25.5
 

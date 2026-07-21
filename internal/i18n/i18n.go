@@ -17,7 +17,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/maxroth/eumel/locales"
+	"handler/locales"
 )
 
 const CookieName = "lang"
