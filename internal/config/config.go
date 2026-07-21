@@ -24,7 +24,7 @@ func Load() *Config {
 		Addr:        getenv("ADDR", ":8080"),
 		Env:         getenv("ENV", "dev"),
 		DBPath:      getenv("DB_PATH", "data/app.db"),
-		DefaultLang: getenv("DEFAULT_LANG", "en"),
+		DefaultLang: getenv("DEFAULT_LANG", "de"),
 	}
 	cfg.Dev = cfg.Env == "dev"
 	return cfg

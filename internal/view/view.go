@@ -17,6 +17,8 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"strings"
+	"time"
 
 	"github.com/maxroth/eumel/internal/i18n"
 	"github.com/maxroth/eumel/web"
@@ -60,11 +62,34 @@ func New(dev bool, tr *i18n.Translator) (*View, error) {
 	return v, nil
 }
 
-// baseFuncs registers every custom template function. The "t" function
-// is a placeholder here; it is rebound to the request language on render.
+// baseFuncs registers every custom template function. The "t" and
+// "tlist" functions are placeholders here; they are rebound to the
+// request language on render.
 func baseFuncs() template.FuncMap {
 	return template.FuncMap{
-		"t": func(key string, args ...any) string { return key },
+		"t":     func(key string, args ...any) string { return key },
+		"tlist": func(key string) []string { return nil },
+		// dict builds a map from key/value pairs so partials can take
+		// named parameters: {{template "x" dict "Title" "..." "Big" true}}
+		"dict": func(pairs ...any) (map[string]any, error) {
+			if len(pairs)%2 != 0 {
+				return nil, fmt.Errorf("dict: odd number of arguments")
+			}
+			m := make(map[string]any, len(pairs)/2)
+			for i := 0; i < len(pairs); i += 2 {
+				key, ok := pairs[i].(string)
+				if !ok {
+					return nil, fmt.Errorf("dict: key %v is not a string", pairs[i])
+				}
+				m[key] = pairs[i+1]
+			}
+			return m, nil
+		},
+		"hasPrefix": strings.HasPrefix,
+		"split":     strings.Split,
+		"add":       func(a, b int) int { return a + b },
+		"mod":       func(a, b int) int { return a % b },
+		"year":      func() int { return time.Now().Year() },
 	}
 }
 
@@ -156,7 +181,8 @@ func (v *View) execute(w http.ResponseWriter, r *http.Request, tmpl *template.Te
 		return
 	}
 	tmpl.Funcs(template.FuncMap{
-		"t": func(key string, args ...any) string { return v.tr.T(lang, key, args...) },
+		"t":     func(key string, args ...any) string { return v.tr.T(lang, key, args...) },
+		"tlist": func(key string) []string { return v.tr.List(lang, key) },
 	})
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")

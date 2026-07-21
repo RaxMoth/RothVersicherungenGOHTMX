@@ -1,0 +1,38 @@
+{{define "title"}}{{t "alters.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "alters.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "alters.hero.eyebrow") "Title" (t "alters.hero.title") "Image" "/static/img/finanz/altersversorgung.jpg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "alters.intro.eyebrow") "Title" (t "alters.intro.title")}}
+        <div class="space-y-6 text-stone-700 text-lg leading-relaxed max-w-4xl">
+            {{range tlist "alters.intro.paragraphs"}}<p>{{.}}</p>{{end}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "alters.services.eyebrow") "Title" (t "alters.services.title")}}
+        <div class="grid md:grid-cols-2 gap-6">
+            {{template "alters-card" dict "Title" (t "alters.services.1.title") "Text" (t "alters.services.1.text")}}
+            {{template "alters-card" dict "Title" (t "alters.services.2.title") "Text" (t "alters.services.2.text")}}
+            {{template "alters-card" dict "Title" (t "alters.services.3.title") "Text" (t "alters.services.3.text")}}
+            {{template "alters-card" dict "Title" (t "alters.services.4.title")}}
+            {{template "alters-card" dict "Title" (t "alters.services.5.title")}}
+            {{template "alters-card" dict "Title" (t "alters.services.6.title")}}
+        </div>
+    </div>
+</section>
+
+{{template "cta" .}}
+{{end}}
+
+{{define "alters-card"}}
+<div class="bg-white p-8 rounded-2xl shadow-card border-l-2 border-brand-red">
+    <h3 class="font-bold tracking-tight text-xl text-stone-900 mb-3">{{.Title}}</h3>
+    {{if .Text}}<p class="text-stone-700 leading-relaxed">{{.Text}}</p>{{end}}
+</div>
+{{end}}

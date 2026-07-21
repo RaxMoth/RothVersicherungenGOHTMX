@@ -7,7 +7,6 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/maxroth/eumel/internal/db"
 	"github.com/maxroth/eumel/internal/view"
 )
 
@@ -16,19 +15,12 @@ type Handler struct {
 	View *view.View
 }
 
-func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
-	todos, err := db.ListTodos(h.DB)
-	if err != nil {
-		h.Error(w, r, err)
-		return
+// Page returns a handler that renders the named static page template.
+// All content comes from locales/, so no per-page data is needed.
+func (h *Handler) Page(name string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		h.View.Render(w, r, http.StatusOK, name, nil)
 	}
-	h.View.Render(w, r, http.StatusOK, "home.html", map[string]any{
-		"Todos": todos,
-	})
-}
-
-func (h *Handler) About(w http.ResponseWriter, r *http.Request) {
-	h.View.Render(w, r, http.StatusOK, "about.html", nil)
 }
 
 func (h *Handler) NotFound(w http.ResponseWriter, r *http.Request) {

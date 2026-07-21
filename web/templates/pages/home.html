@@ -1,28 +1,63 @@
+{{define "title"}}{{t "home.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "home.meta.description"}}{{end}}
+
 {{define "content"}}
-<section class="mb-12">
-    <h1 class="mb-3 text-3xl font-bold tracking-tight">{{t "home.heading"}}</h1>
-    <p class="text-zinc-600 dark:text-zinc-400">{{t "home.intro"}}</p>
+{{template "page-hero" dict "Eyebrow" (t "home.hero.eyebrow") "Title" (t "home.hero.title") "Subtitle" (t "home.hero.subtitle") "Image" "/static/img/versicherungen/hero.png" "Tall" true}}
+
+<section class="bg-white border-b border-brand-line" aria-label="{{t "home.trust.aria"}}">
+    <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 px-6">
+        <div class="py-8 text-center md:border-r border-brand-line">
+            <p class="font-bold tracking-tight text-2xl md:text-3xl text-stone-900">{{t "home.trust.1.value"}}</p>
+            <p class="text-sm text-stone-600 mt-2">{{t "home.trust.1.label"}}</p>
+        </div>
+        <div class="py-8 text-center md:border-r border-brand-line">
+            <p class="font-bold tracking-tight text-2xl md:text-3xl text-stone-900">{{t "home.trust.2.value"}}</p>
+            <p class="text-sm text-stone-600 mt-2">{{t "home.trust.2.label"}}</p>
+        </div>
+        <div class="py-8 text-center md:border-r border-brand-line">
+            <p class="font-bold tracking-tight text-2xl md:text-3xl text-stone-900">{{t "home.trust.3.value"}}</p>
+            <p class="text-sm text-stone-600 mt-2">{{t "home.trust.3.label"}}</p>
+        </div>
+        <div class="py-8 text-center">
+            <p class="font-bold tracking-tight text-2xl md:text-3xl text-stone-900">{{t "home.trust.4.value"}}</p>
+            <p class="text-sm text-stone-600 mt-2">{{t "home.trust.4.label"}}</p>
+        </div>
+    </div>
 </section>
 
-<!-- HTMX demo: a todo list backed by SQLite. Every mutation returns the
-     "todo-list" partial, which replaces #todo-list. Delete this section
-     (plus internal/handlers/todos.go and the todos migration) when
-     starting a real project. -->
-<section class="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-    <h2 class="mb-4 text-xl font-semibold">{{t "todos.heading"}}</h2>
-
-    <form hx-post="/todos" hx-target="#todo-list" hx-swap="outerHTML"
-          hx-on::after-request="if(event.detail.successful) this.reset()"
-          class="mb-4 flex gap-2">
-        <input type="text" name="title" required
-               placeholder="{{t "todos.placeholder"}}"
-               class="flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-950">
-        <button type="submit"
-                class="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300">
-            {{t "todos.add"}}
-        </button>
-    </form>
-
-    {{template "todo-list" .}}
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "home.about.eyebrow") "Title" (t "home.about.title")}}
+        <div class="space-y-6 text-stone-700 text-[17px] leading-relaxed max-w-4xl">
+            {{range tlist "home.about.paragraphs"}}<p>{{.}}</p>{{end}}
+        </div>
+    </div>
 </section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "home.services.eyebrow") "Title" (t "home.services.title")}}
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {{template "link-card" dict "Href" "/roth-versicherungen/privatkunden" "Title" (t "home.services.privatkunden.title") "Text" (t "home.services.privatkunden.text")}}
+            {{template "link-card" dict "Href" "/roth-versicherungen/firmenkunden" "Title" (t "home.services.firmenkunden.title") "Text" (t "home.services.firmenkunden.text")}}
+            {{template "link-card" dict "Href" "/roth-finanz/altersversorgung" "Title" (t "home.services.alters.title") "Text" (t "home.services.alters.text")}}
+            {{template "link-card" dict "Href" "/kontakt-anfahrt" "Title" (t "home.services.kontakt.title") "Text" (t "home.services.kontakt.text")}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "home.location.eyebrow") "Title" (t "home.location.title")}}
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <img src="/static/img/home/hero.png" alt="{{t "home.location.image_alt"}}" class="w-64 h-auto" loading="lazy">
+            <div class="space-y-4 text-stone-700 text-[17px] leading-relaxed">
+                <p>{{t "home.location.body"}}</p>
+                <p>{{t "home.location.body_extra"}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{template "cta" .}}
 {{end}}

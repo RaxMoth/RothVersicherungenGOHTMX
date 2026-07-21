@@ -1,0 +1,26 @@
+{{define "title"}}{{t "datenschutz.meta.title" (t "legal.vers.short")}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "datenschutz.meta.description" (t "legal.vers.name")}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "datenschutz.hero.eyebrow.vers") "Title" (t "datenschutz.hero.title") "Subtitle" (t "datenschutz.hero.subtitle" (t "legal.vers.short")) "Image" "/static/img/versicherungen/wichtige-hinweise.jpg"}}
+
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.usage.title") "Body" (t "datenschutz.vers.usage.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.scope.title") "Body" (t "datenschutz.vers.scope.body") "Page" true}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.terms.title") "Body" (t "datenschutz.vers.terms.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.collect.title") "Body" (t "datenschutz.vers.collect.body") "Page" true}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.confidential.title") "Body" (t "datenschutz.vers.confidential.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.security.title") "Body" (t "datenschutz.vers.security.body") "Page" true}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "datenschutz.vers.rights.title")}}
+        <ul class="space-y-2 text-stone-700 text-lg max-w-3xl">
+            {{range tlist "datenschutz.rights"}}<li>• {{.}}</li>{{end}}
+        </ul>
+    </div>
+</section>
+
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.breach.title") "Body" (t "datenschutz.vers.breach.body") "Page" true}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.vers.complaints.title") "Body" (t "datenschutz.vers.complaints.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.cookies.title") "Body" (t "datenschutz.cookies.body") "Page" true}}
+{{end}}

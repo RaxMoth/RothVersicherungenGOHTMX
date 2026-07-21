@@ -1,0 +1,69 @@
+{{define "title"}}{{t "impressum.meta.title" (t "legal.vers.short")}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "impressum.meta.description" (t "legal.vers.name")}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "impressum.hero.eyebrow.vers") "Title" (t "impressum.hero.title") "Subtitle" (t "legal.vers.tagline") "Image" "/static/img/versicherungen/history.jpeg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.provider")}}
+        {{template "legal-address" dict "Name" (t "legal.vers.name") "Email" (t "company.email")}}
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.management")}}
+        <p class="text-stone-900 text-lg">{{t "legal.vers.management"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.registry")}}
+        <ul class="space-y-3 text-stone-700 text-lg">
+            <li><strong class="text-stone-900">{{t "impressum.labels.court"}}</strong> {{t "legal.vers.registry"}}</li>
+            <li><strong class="text-stone-900">{{t "impressum.labels.type"}}</strong> {{t "legal.vers.type"}}</li>
+            <li><strong class="text-stone-900">{{t "impressum.labels.vermittler_nr"}}</strong> {{t "legal.vers.vermittler_nr"}}</li>
+            <li><strong class="text-stone-900">{{t "impressum.labels.ust_id"}}</strong> {{t "legal.vers.ust_id"}}</li>
+        </ul>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.authority")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">{{t "impressum.authority.body" (t "legal.vers.erlaubnis") (t "legal.vers.aufsicht")}}</p>
+        <p class="mt-4 text-stone-700 text-lg">
+            <strong class="text-stone-900">{{t "legal.dihk.name"}}</strong><br>
+            {{t "legal.dihk.street"}}<br>
+            {{t "legal.dihk.city"}}<br>
+            {{t "impressum.labels.tel"}} {{t "legal.dihk.phone"}}<br>
+            {{t "impressum.labels.register"}} <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" class="text-brand-red">{{t "legal.dihk.register"}}</a>
+        </p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.association")}}
+        <p class="text-stone-700 text-lg">{{t "impressum.association.body" (t "legal.vers.verband")}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.editor")}}
+        <p class="text-stone-700 text-lg">{{t "legal.vers.editor"}} {{t "impressum.editor_suffix"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.liability")}}
+        <div class="space-y-4 text-stone-700 leading-relaxed text-lg max-w-3xl">
+            {{range tlist "impressum.liability"}}<p>{{.}}</p>{{end}}
+        </div>
+    </div>
+</section>
+{{end}}

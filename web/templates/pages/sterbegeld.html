@@ -1,0 +1,83 @@
+{{define "title"}}{{t "sterbegeld.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "sterbegeld.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "sterbegeld.hero.eyebrow") "Title" (t "sterbegeld.hero.title") "Image" "/static/img/finanz/sterbegeld.jpg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "sterbegeld.intro.eyebrow") "Title" (t "sterbegeld.intro.title")}}
+        <div class="space-y-6 text-stone-700 text-lg leading-relaxed max-w-4xl">
+            {{range tlist "sterbegeld.intro.paragraphs"}}<p>{{.}}</p>{{end}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "sterbegeld.inheritance.eyebrow") "Title" (t "sterbegeld.inheritance.title")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-4xl">{{t "sterbegeld.inheritance.body"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "sterbegeld.costs.eyebrow") "Title" (t "sterbegeld.costs.title")}}
+        <div class="space-y-5 text-stone-700 text-lg leading-relaxed max-w-4xl mb-8">
+            {{range tlist "sterbegeld.costs.paragraphs"}}<p>{{.}}</p>{{end}}
+        </div>
+
+        <div class="overflow-x-auto bg-white rounded-2xl shadow-card">
+            <table class="w-full text-left">
+                <thead class="bg-stone-900 text-white">
+                    <tr>
+                        <th class="px-6 py-4 font-semibold">{{t "sterbegeld.table.header.position"}}</th>
+                        <th class="px-6 py-4 font-semibold text-right">{{t "sterbegeld.table.header.simple"}}</th>
+                        <th class="px-6 py-4 font-semibold text-right">{{t "sterbegeld.table.header.elaborate"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range tlist "sterbegeld.table.rows"}}
+                    {{$cells := split . "|"}}
+                    <tr class="border-b border-stone-200">
+                        <td class="px-6 py-3 text-stone-900">{{index $cells 0}}</td>
+                        <td class="px-6 py-3 text-right text-stone-700">{{index $cells 1}}</td>
+                        <td class="px-6 py-3 text-right text-stone-700">{{index $cells 2}}</td>
+                    </tr>
+                    {{end}}
+                    <tr class="border-b-2 border-stone-300 bg-stone-50">
+                        <td class="px-6 py-3 font-semibold text-stone-900">{{t "sterbegeld.table.sum_label"}}</td>
+                        <td class="px-6 py-3 text-right font-semibold text-stone-900">{{t "sterbegeld.table.sum_simple"}}</td>
+                        <td class="px-6 py-3 text-right font-semibold text-stone-900">{{t "sterbegeld.table.sum_elaborate"}}</td>
+                    </tr>
+                    <tr class="border-b border-stone-200">
+                        <td class="px-6 py-3 text-stone-900">{{t "sterbegeld.table.fees_label"}}</td>
+                        <td colspan="2" class="px-6 py-3 text-right text-stone-700">{{t "sterbegeld.table.fees_value"}}</td>
+                    </tr>
+                    <tr class="bg-brand-red text-white">
+                        <td class="px-6 py-4 font-semibold">{{t "sterbegeld.table.total_label"}}</td>
+                        <td class="px-6 py-4 text-right font-semibold">{{t "sterbegeld.table.total_simple"}}</td>
+                        <td class="px-6 py-4 text-right font-semibold">{{t "sterbegeld.table.total_elaborate"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "sterbegeld.facts.eyebrow") "Title" (t "sterbegeld.facts.title")}}
+        <ul class="space-y-4 text-stone-700 text-lg max-w-4xl">
+            {{range tlist "sterbegeld.facts.items"}}
+            <li class="flex gap-4 border-b border-stone-200 pb-4">
+                <span class="text-brand-red font-bold mt-1">›</span>
+                <span class="leading-relaxed">{{.}}</span>
+            </li>
+            {{end}}
+        </ul>
+    </div>
+</section>
+
+{{template "cta" .}}
+{{end}}

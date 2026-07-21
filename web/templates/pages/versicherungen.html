@@ -1,0 +1,38 @@
+{{define "title"}}{{t "vers.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "vers.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "vers.hero.eyebrow") "Title" (t "vers.hero.title") "Image" "/static/img/versicherungen/hero.png"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "vers.tradition.eyebrow") "Title" (t "vers.tradition.title")}}
+        <div class="space-y-6 text-stone-700 text-lg leading-relaxed max-w-4xl">
+            {{range tlist "vers.tradition.paragraphs"}}<p>{{.}}</p>{{end}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "vers.archive.eyebrow") "Title" (t "vers.archive.title")}}
+        <div class="grid md:grid-cols-2 gap-8">
+            <img src="/static/img/versicherungen/hero.png" alt="{{t "vers.archive.image1_alt"}}" class="w-full h-[360px] object-cover rounded-2xl shadow-card" loading="lazy">
+            <img src="/static/img/versicherungen/history.jpeg" alt="{{t "vers.archive.image2_alt"}}" class="w-full h-[360px] object-cover rounded-2xl shadow-card" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "vers.services.eyebrow") "Title" (t "vers.services.title")}}
+        <div class="grid md:grid-cols-2 gap-6">
+            {{template "link-card" dict "Big" true "Href" "/roth-versicherungen/firmenkunden" "Title" (t "vers.services.firmenkunden.title") "Text" (t "vers.services.firmenkunden.text")}}
+            {{template "link-card" dict "Big" true "Href" "/roth-versicherungen/privatkunden" "Title" (t "vers.services.privatkunden.title") "Text" (t "vers.services.privatkunden.text")}}
+        </div>
+        <p class="mt-10 text-stone-700 text-lg leading-relaxed italic max-w-3xl">{{t "vers.services.outro"}}</p>
+    </div>
+</section>
+
+{{template "cta" .}}
+{{end}}

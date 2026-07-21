@@ -1,6 +1,6 @@
-# Eumel — Go + HTMX Website Template
+# Roth Versicherungen — Go + HTMX
 
-A batteries-included base template for server-rendered websites. Copy it, rename it, build on it.
+Server-rendered website for Roth Versicherungen Maklergesellschaft m.b.H. and Roth Finanz Maklergesellschaft m.b.H. in Langen, converted from the original React SPA.
 
 **Stack:** Go stdlib (router + `html/template`) · [HTMX](https://htmx.org) (vendored) · [Tailwind CSS v4](https://tailwindcss.com) (standalone CLI, no Node.js) · SQLite (pure-Go driver, no CGO) · JSON-based i18n
 
@@ -19,35 +19,38 @@ cmd/server/            Entrypoint: config, DB, i18n, renderer, graceful shutdown
 internal/
   config/              Env-var configuration (ADDR, ENV, DB_PATH, DEFAULT_LANG)
   server/              Routes + middleware (language, logging, panic recovery)
-  handlers/            HTTP handlers — pages render full templates, HTMX endpoints render partials
-  db/                  SQLite setup, embedded migrations, query functions
-  db/migrations/       0001_*.sql, 0002_*.sql, ... applied in order at startup
+  handlers/            HTTP handlers — every page renders a static template
+  db/                  SQLite setup, embedded migrations (currently unused, kept for future features)
   i18n/                String loading + per-request language resolution
   view/                Template renderer (dev: live reload, prod: parsed once, embedded)
-locales/               All UI strings: en.json, de.json, ... (flat JSON, dot keys)
+locales/               All site content and UI strings: de.json (flat JSON, dot keys)
 web/
-  templates/layouts/   base.html — the page shell
+  templates/layouts/   base.html — the page shell (header, footer, meta)
   templates/pages/     One file per page, fills the "content" block
-  templates/partials/  Shared snippets, also rendered standalone for HTMX responses
-  static/              css/ (Tailwind in+out), js/ (vendored htmx), img/
+  templates/partials/  nav, footer, page-hero, section-head, cta, link-card, legal helpers
+  static/              css/ (Tailwind in+out), js/ (vendored htmx + nav.js), img/ (site images)
 ```
+
+## Pages
+
+| Route | Template |
+| --- | --- |
+| `/` | home.html |
+| `/roth-versicherungen` (+ firmenkunden, cyber-police, privatkunden, tierkrankenversicherung, wichtige-hinweise, jobs, erstinformation, datenschutz, impressum) | versicherungen.html … |
+| `/roth-finanz` (+ altersversorgung, sterbegeldversicherung, erstinformation, datenschutz, impressum) | finanz.html … |
+| `/team`, `/kontakt-anfahrt`, `/sitemap` | team.html, kontakt.html, sitemap.html |
 
 ## How to…
 
 ### Add a page
 
-1. Create `web/templates/pages/contact.html` with a `{{define "content"}}` block.
-2. Add a handler in `internal/handlers/` calling `h.View.Render(w, r, http.StatusOK, "contact.html", data)`.
-3. Register the route in `internal/server/server.go`.
-4. Add its strings to every file in `locales/`.
+1. Create `web/templates/pages/name.html` with `{{define "content"}}` (plus optional `title`/`description` blocks).
+2. Register the route in `internal/server/server.go`: `mux.HandleFunc("GET /path", h.Page("name.html"))`.
+3. Add its strings to `locales/de.json`.
 
-### Add an HTMX endpoint
+### Edit content
 
-Handler renders a partial instead of a page: `h.View.RenderPartial(w, r, "my-partial", data)`. In the template, point at it with `hx-post`/`hx-get` + `hx-target`. See the todo demo (`internal/handlers/todos.go`, `web/templates/partials/todo-list.html`) for the pattern.
-
-### Add a language
-
-Drop `locales/fr.json` with the same keys as `en.json`. That's it — it's picked up at startup and appears in the nav switcher. Strings are `fmt.Sprintf` format strings when you pass arguments: `{{t "todos.count" 5}}`.
+All visible text lives in `locales/de.json`. Lists use numbered keys (`x.items.1`, `x.items.2`, …) and are rendered with the `tlist` template function; changing text needs no template edits.
 
 ### Add a migration
 
@@ -61,12 +64,6 @@ ENV=prod ./bin/server
 ```
 
 The binary is fully self-contained — copy it to the server and run it. Configuration via env vars (see `.env.example`).
-
-## Starting a new project from this template
-
-1. Copy the repo, then rename the module: `go mod edit -module github.com/you/newproject && grep -rl maxroth/eumel --include='*.go' . | xargs sed -i '' 's|github.com/maxroth/eumel|github.com/you/newproject|g'`
-2. Replace the todo demo: delete `internal/handlers/todos.go`, `internal/db/todos.go`, the demo section in `home.html`, `partials/todo-list.html`, and write your own `0001_*.sql`.
-3. Update `locales/*.json` with your site name and strings.
 
 ## Make targets
 

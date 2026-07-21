@@ -1,0 +1,66 @@
+{{define "title"}}{{t "firmen.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "firmen.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "firmen.hero.eyebrow") "Title" (t "firmen.hero.title") "Subtitle" (t "firmen.hero.subtitle") "Image" "/static/img/versicherungen/firmenkunden.jpg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "firmen.intro.eyebrow") "Title" (t "firmen.intro.title")}}
+        <div class="space-y-6 text-stone-700 text-lg leading-relaxed max-w-4xl">
+            {{range tlist "firmen.intro.paragraphs"}}<p>{{.}}</p>{{end}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "firmen.pillars.eyebrow") "Title" (t "firmen.pillars.title")}}
+        <div class="grid md:grid-cols-3 gap-6">
+            {{template "pillar-card" dict "Title" (t "firmen.pillars.risiko.title") "Items" (tlist "firmen.pillars.risiko.items")}}
+            {{template "pillar-card" dict "Title" (t "firmen.pillars.vertrag.title") "Items" (tlist "firmen.pillars.vertrag.items")}}
+            {{template "pillar-card" dict "Title" (t "firmen.pillars.schaden.title") "Items" (tlist "firmen.pillars.schaden.items")}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "firmen.special.eyebrow") "Title" (t "firmen.special.title")}}
+        <div class="grid md:grid-cols-3 gap-4">
+            {{range tlist "firmen.special.items"}}
+            <div class="bg-white p-6 rounded-2xl shadow-card text-stone-900 font-medium text-center border-l-2 border-brand-red">{{.}}</div>
+            {{end}}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "firmen.cyber.eyebrow") "Title" (t "firmen.cyber.title")}}
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <img src="/static/img/versicherungen/cyber-police.jpg" alt="{{t "firmen.cyber.image_alt"}}" class="w-full h-[340px] object-cover rounded-2xl shadow-card" loading="lazy">
+            <div>
+                <p class="text-stone-700 text-lg leading-relaxed mb-6">{{t "firmen.cyber.body"}}</p>
+                <a href="/roth-versicherungen/firmenkunden/cyber-police" class="inline-block bg-brand-red hover:bg-brand-red-dark transition text-white font-semibold px-7 py-4 rounded-full">{{t "firmen.cyber.cta"}}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{template "cta" .}}
+{{end}}
+
+{{define "pillar-card"}}
+<div class="bg-white p-8 rounded-2xl shadow-card hover:shadow-card-hover transition border-t-2 border-brand-red">
+    <h3 class="font-bold tracking-tight text-2xl text-stone-900 mb-5">{{.Title}}</h3>
+    <ul class="space-y-3 text-stone-700">
+        {{range .Items}}
+        <li class="flex gap-3 leading-snug text-sm">
+            <span class="text-brand-red font-bold mt-0.5">›</span>
+            <span>{{.}}</span>
+        </li>
+        {{end}}
+    </ul>
+</div>
+{{end}}

@@ -1,12 +1,12 @@
-{{define "title"}}{{t (printf "error.%d.title" .Data.Status)}} · {{t "site.title"}}{{end}}
+{{define "title"}}{{if eq .Data.Status 404}}{{t "notfound.meta.title"}}{{else}}{{t "error.500.meta.title"}}{{end}} | {{t "site.title"}}{{end}}
 
 {{define "content"}}
-<div class="py-16 text-center">
-    <p class="mb-2 text-6xl font-bold text-zinc-300 dark:text-zinc-700">{{.Data.Status}}</p>
-    <h1 class="mb-3 text-2xl font-semibold">{{t (printf "error.%d.title" .Data.Status)}}</h1>
-    <p class="mb-8 text-zinc-600 dark:text-zinc-400">{{t (printf "error.%d.body" .Data.Status)}}</p>
-    <a href="/" class="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300">
-        {{t "error.back_home"}}
-    </a>
+{{if eq .Data.Status 404}}
+{{template "page-hero" dict "Eyebrow" (t "notfound.eyebrow") "Title" (t "notfound.title") "Subtitle" (t "notfound.subtitle")}}
+{{else}}
+{{template "page-hero" dict "Eyebrow" (printf "%d" .Data.Status) "Title" (t "error.500.title") "Subtitle" (t "error.500.subtitle")}}
+{{end}}
+<div class="py-24 px-6 text-center bg-brand-page">
+    <a href="/" class="inline-block bg-brand-red hover:bg-brand-red-dark transition text-white font-semibold px-8 py-4 rounded-full">{{t "actions.back_to_home"}}</a>
 </div>
 {{end}}

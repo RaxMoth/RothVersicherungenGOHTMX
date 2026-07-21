@@ -1,21 +1,100 @@
 {{define "nav"}}
-<header class="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
-    <nav class="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-        <a href="/" class="text-lg font-semibold tracking-tight">{{t "site.title"}}</a>
-        <div class="flex items-center gap-6 text-sm">
-            <a href="/" class="hover:underline {{if eq .Path "/"}}font-semibold{{end}}">{{t "nav.home"}}</a>
-            <a href="/about" class="hover:underline {{if eq .Path "/about"}}font-semibold{{end}}">{{t "nav.about"}}</a>
-            <div class="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
-                {{$current := .Lang}}{{$path := .Path}}
-                {{range .Languages}}
-                    {{if eq . $current}}
-                        <span class="font-semibold uppercase text-zinc-900 dark:text-zinc-100">{{.}}</span>
-                    {{else}}
-                        <a href="{{$path}}?lang={{.}}" class="uppercase hover:underline">{{.}}</a>
-                    {{end}}
-                {{end}}
+<header data-header class="fixed top-0 left-0 right-0 z-30 bg-white shadow-sm">
+    <div class="bg-stone-900 text-white text-xs md:text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center gap-4 flex-wrap">
+            <p class="text-stone-200 hidden sm:block">
+                {{t "header.since"}} <span class="text-white font-semibold">{{t "header.since_vers"}}</span> ·
+                {{t "header.since_finanz_label"}} <span class="text-white font-semibold">{{t "header.since_finanz"}}</span> ·
+                {{t "header.in_langen"}}
+            </p>
+            <div class="flex items-center gap-5">
+                <a href="tel:{{t "company.phone_tel"}}" class="flex items-center gap-2 hover:text-red-400 transition" aria-label="{{t "header.call_aria" (t "company.phone")}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>{{t "company.phone"}}</span>
+                </a>
+                <a href="mailto:{{t "company.email"}}" class="hidden md:flex items-center gap-2 hover:text-red-400 transition" aria-label="{{t "header.mail_aria" (t "company.email")}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <span>{{t "company.email"}}</span>
+                </a>
+                <span class="hidden lg:flex items-center gap-2 text-stone-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>{{t "header.hours_short"}}</span>
+                </span>
             </div>
         </div>
+    </div>
+
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:flex md:justify-between md:items-center" aria-label="{{t "nav.primary"}}">
+        <div class="flex justify-between items-center">
+            <a href="/" class="flex items-center" aria-label="{{t "nav.home_logo"}}">
+                {{if hasPrefix .Path "/roth-finanz"}}
+                    <img src="/static/img/logos/roth-finanz.png" alt="" class="h-12 md:h-14 w-auto">
+                    <span class="sr-only">{{t "nav.roth_finanz"}}</span>
+                {{else}}
+                    <img src="/static/img/logos/roth-versicherungen.png" alt="" class="h-12 md:h-14 w-auto">
+                    <span class="sr-only">{{t "nav.roth_versicherungen"}}</span>
+                {{end}}
+            </a>
+            <button type="button" data-mobile-button class="md:hidden text-stone-900 p-2 -mr-2" aria-label="{{t "nav.open_menu"}}" aria-expanded="false" aria-controls="primary-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" data-icon-open class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" data-icon-close class="h-7 w-7 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </div>
+
+        <ul id="primary-menu" class="hidden md:flex md:items-center md:gap-1 list-none mt-3 md:mt-0">
+            <li>
+                <a href="/" class="block px-4 py-3 text-[15px] font-medium transition rounded-full {{if eq .Path "/"}}text-brand-red{{else}}text-stone-900 hover:text-brand-red{{end}}" {{if eq .Path "/"}}aria-current="page"{{end}}>{{t "nav.welcome"}}</a>
+            </li>
+            <li class="relative">
+                <button type="button" data-dropdown-button aria-haspopup="true" aria-expanded="false"
+                        class="w-full md:w-auto text-left px-4 py-3 text-[15px] font-medium transition rounded-full inline-flex items-center gap-1 {{if hasPrefix .Path "/roth-versicherungen"}}text-brand-red{{else}}text-stone-900 hover:text-brand-red{{end}}">
+                    {{t "nav.roth_versicherungen"}}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <ul class="hidden md:absolute md:right-0 md:w-72 mt-2 bg-white shadow-card-hover ring-1 ring-stone-100 z-20 list-none rounded-2xl overflow-hidden p-2" role="menu">
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen" "Label" (t "nav.uebersicht") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/firmenkunden" "Label" (t "nav.firmenkunden") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/firmenkunden/cyber-police" "Label" (t "nav.cyber") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/privatkunden" "Label" (t "nav.privatkunden") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/privatkunden/tierkrankenversicherung" "Label" (t "nav.tier") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/wichtige-hinweise" "Label" (t "nav.hinweise") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/jobs" "Label" (t "nav.jobs") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/erstinformation" "Label" (t "nav.erstinformation") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/datenschutz" "Label" (t "nav.datenschutz") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-versicherungen/impressum" "Label" (t "nav.impressum") "Path" .Path}}
+                </ul>
+            </li>
+            <li class="relative">
+                <button type="button" data-dropdown-button aria-haspopup="true" aria-expanded="false"
+                        class="w-full md:w-auto text-left px-4 py-3 text-[15px] font-medium transition rounded-full inline-flex items-center gap-1 {{if hasPrefix .Path "/roth-finanz"}}text-brand-red{{else}}text-stone-900 hover:text-brand-red{{end}}">
+                    {{t "nav.roth_finanz"}}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <ul class="hidden md:absolute md:right-0 md:w-72 mt-2 bg-white shadow-card-hover ring-1 ring-stone-100 z-20 list-none rounded-2xl overflow-hidden p-2" role="menu">
+                    {{template "nav-drop-link" dict "Href" "/roth-finanz" "Label" (t "nav.uebersicht") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-finanz/altersversorgung" "Label" (t "nav.altersversorgung") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-finanz/sterbegeldversicherung" "Label" (t "nav.sterbegeld") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-finanz/erstinformation" "Label" (t "nav.erstinformation") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-finanz/datenschutz" "Label" (t "nav.datenschutz") "Path" .Path}}
+                    {{template "nav-drop-link" dict "Href" "/roth-finanz/impressum" "Label" (t "nav.impressum") "Path" .Path}}
+                </ul>
+            </li>
+            <li>
+                <a href="/team" class="block px-4 py-3 text-[15px] font-medium transition rounded-full {{if eq .Path "/team"}}text-brand-red{{else}}text-stone-900 hover:text-brand-red{{end}}" {{if eq .Path "/team"}}aria-current="page"{{end}}>{{t "nav.team"}}</a>
+            </li>
+            <li>
+                <a href="/kontakt-anfahrt" class="block px-4 py-3 text-[15px] font-medium transition rounded-full {{if eq .Path "/kontakt-anfahrt"}}text-brand-red{{else}}text-stone-900 hover:text-brand-red{{end}}" {{if eq .Path "/kontakt-anfahrt"}}aria-current="page"{{end}}>{{t "nav.kontakt"}}</a>
+            </li>
+            <li class="md:ml-3">
+                <a href="/kontakt-anfahrt" class="block md:inline-block bg-brand-red hover:bg-brand-red-dark transition text-white font-semibold px-5 py-3 text-[14px] rounded-full text-center">{{t "nav.termin"}}</a>
+            </li>
+        </ul>
     </nav>
 </header>
+{{end}}
+
+{{define "nav-drop-link"}}
+<li role="none">
+    <a href="{{.Href}}" role="menuitem" class="block px-4 py-2.5 text-[14px] rounded-xl {{if eq .Path .Href}}bg-brand-red/10 text-brand-red font-semibold{{else}}text-stone-900 hover:bg-stone-100{{end}}">{{.Label}}</a>
+</li>
 {{end}}

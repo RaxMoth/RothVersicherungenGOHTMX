@@ -1,0 +1,2 @@
+-- No tables yet: the site is fully content-driven. Add real
+-- migrations here (0002_name.sql, ...) when features need storage.

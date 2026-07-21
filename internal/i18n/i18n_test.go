@@ -7,7 +7,7 @@ import (
 
 func newTestTranslator(t *testing.T) *Translator {
 	t.Helper()
-	tr, err := Load("en")
+	tr, err := Load("de")
 	if err != nil {
 		t.Fatalf("Load: %v", err)
 	}
@@ -17,33 +17,36 @@ func newTestTranslator(t *testing.T) *Translator {
 func TestT(t *testing.T) {
 	tr := newTestTranslator(t)
 
-	if got := tr.T("en", "nav.home"); got != "Home" {
-		t.Errorf("en nav.home = %q, want %q", got, "Home")
-	}
-	if got := tr.T("de", "nav.home"); got != "Startseite" {
-		t.Errorf("de nav.home = %q, want %q", got, "Startseite")
+	if got := tr.T("de", "nav.welcome"); got != "Willkommen" {
+		t.Errorf("de nav.welcome = %q, want %q", got, "Willkommen")
 	}
 	// Unknown language falls back to the default language.
-	if got := tr.T("fr", "nav.home"); got != "Home" {
-		t.Errorf("fr nav.home = %q, want fallback %q", got, "Home")
+	if got := tr.T("fr", "nav.welcome"); got != "Willkommen" {
+		t.Errorf("fr nav.welcome = %q, want fallback %q", got, "Willkommen")
 	}
 	// Unknown key falls back to the key itself.
-	if got := tr.T("en", "does.not.exist"); got != "does.not.exist" {
+	if got := tr.T("de", "does.not.exist"); got != "does.not.exist" {
 		t.Errorf("unknown key = %q, want the key itself", got)
+	}
+}
+
+func TestList(t *testing.T) {
+	tr := newTestTranslator(t)
+
+	items := tr.List("de", "home.about.paragraphs")
+	if len(items) != 3 {
+		t.Fatalf("home.about.paragraphs: got %d items, want 3", len(items))
+	}
+	if items := tr.List("de", "does.not.exist"); len(items) != 0 {
+		t.Errorf("unknown list key: got %d items, want 0", len(items))
 	}
 }
 
 func TestResolve(t *testing.T) {
 	tr := newTestTranslator(t)
 
-	// Query parameter wins.
-	r := httptest.NewRequest("GET", "/?lang=de", nil)
-	if got := tr.Resolve(r); got != "de" {
-		t.Errorf("query lang: got %q, want de", got)
-	}
-
-	// Cookie is used when no query parameter is set.
-	r = httptest.NewRequest("GET", "/", nil)
+	// Cookie sets the language when supported.
+	r := httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Cookie", CookieName+"=de")
 	if got := tr.Resolve(r); got != "de" {
 		t.Errorf("cookie lang: got %q, want de", got)
@@ -59,7 +62,7 @@ func TestResolve(t *testing.T) {
 	// Nothing supported falls back to the default language.
 	r = httptest.NewRequest("GET", "/", nil)
 	r.Header.Set("Accept-Language", "fr,es")
-	if got := tr.Resolve(r); got != "en" {
-		t.Errorf("fallback: got %q, want en", got)
+	if got := tr.Resolve(r); got != "de" {
+		t.Errorf("fallback: got %q, want de", got)
 	}
 }

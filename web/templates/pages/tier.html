@@ -1,0 +1,59 @@
+{{define "title"}}{{t "tier.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "tier.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "tier.hero.eyebrow") "Title" (t "tier.hero.title") "Subtitle" (t "tier.hero.subtitle") "Image" "/static/img/versicherungen/tierkrankenversicherung.jpg"}}
+
+{{template "tier-text-section" dict "Eyebrow" (t "tier.intro.eyebrow") "Title" (t "tier.intro.title") "Body" (t "tier.intro.body") "Page" false}}
+{{template "tier-text-section" dict "Eyebrow" (t "tier.target.eyebrow") "Title" (t "tier.target.title") "Body" (t "tier.target.body") "Page" true}}
+{{template "tier-text-section" dict "Eyebrow" (t "tier.coverage.eyebrow") "Title" (t "tier.coverage.title") "Body" (t "tier.coverage.body") "Page" false}}
+{{template "tier-text-section" dict "Eyebrow" (t "tier.exclusions.eyebrow") "Title" (t "tier.exclusions.title") "Body" (t "tier.exclusions.body") "Page" true}}
+{{template "tier-text-section" dict "Eyebrow" (t "tier.premium.eyebrow") "Title" (t "tier.premium.title") "Body" (t "tier.premium.body") "Page" false}}
+{{template "tier-text-section" dict "Eyebrow" (t "tier.payout.eyebrow") "Title" (t "tier.payout.title") "Body" (t "tier.payout.body") "Page" true}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "tier.examples.eyebrow") "Title" (t "tier.examples.title")}}
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-8 rounded-2xl shadow-card border-b-2 border-brand-red">
+                <p class="font-bold tracking-tight text-2xl text-stone-900 mb-2">{{t "tier.examples.1.title"}}</p>
+                <p class="font-bold tracking-tight text-4xl text-brand-red">{{t "tier.examples.1.price"}}</p>
+                <p class="text-stone-700 mt-3 leading-relaxed">{{t "tier.examples.1.text"}}</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-card border-b-2 border-brand-red">
+                <p class="font-bold tracking-tight text-2xl text-stone-900 mb-2">{{t "tier.examples.2.title"}}</p>
+                <p class="font-bold tracking-tight text-4xl text-brand-red">{{t "tier.examples.2.price"}}</p>
+                <p class="text-stone-700 mt-3 leading-relaxed">{{t "tier.examples.2.text"}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "tier.extras.eyebrow") "Title" (t "tier.extras.title")}}
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-8 rounded-2xl shadow-card border-t-2 border-brand-red">
+                <h3 class="font-bold tracking-tight text-2xl text-stone-900 mb-3">{{t "tier.extras.1.title"}}</h3>
+                <p class="text-stone-700 leading-relaxed">{{t "tier.extras.1.text"}}</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-card border-t-2 border-brand-red">
+                <h3 class="font-bold tracking-tight text-2xl text-stone-900 mb-3">{{t "tier.extras.2.title"}}</h3>
+                <p class="text-stone-700 leading-relaxed">{{t "tier.extras.2.text"}}</p>
+            </div>
+        </div>
+        <p class="mt-8 text-sm text-stone-500">{{t "tier.extras.source"}}</p>
+    </div>
+</section>
+
+{{template "cta" .}}
+{{end}}
+
+{{define "tier-text-section"}}
+<section class="py-16 md:py-24 px-6 {{if .Page}}bg-brand-page{{else}}bg-white{{end}}">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" .Eyebrow "Title" .Title}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-4xl">{{.Body}}</p>
+    </div>
+</section>
+{{end}}

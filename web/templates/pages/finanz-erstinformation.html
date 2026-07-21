@@ -1,0 +1,75 @@
+{{define "title"}}{{t "erstinfo.meta.title" (t "legal.finanz.short")}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "erstinfo.meta.description.finanz"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "erstinfo.hero.eyebrow.finanz") "Title" (t "erstinfo.hero.title") "Subtitle" (t "erstinfo.hero.subtitle") "Image" "/static/img/versicherungen/history.jpeg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "erstinfo.company.eyebrow") "Title" (t "erstinfo.company.title")}}
+        {{template "legal-address" dict "Name" (t "legal.finanz.name") "Email" (t "company.email_finanz")}}
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "erstinfo.status.eyebrow") "Title" (t "erstinfo.status.title")}}
+        <div class="space-y-5 text-stone-700 leading-relaxed text-lg max-w-3xl">
+            <p>{{t "erstinfo.status.finanz.p1"}}</p>
+            <p>
+                <strong class="text-stone-900">{{t "erstinfo.status.finanz.authorities_label"}}</strong><br>
+                {{t "erstinfo.status.finanz.authority_vers"}}<br>
+                {{t "erstinfo.status.finanz.authority_finanz"}}
+            </p>
+            <p>
+                {{t "erstinfo.status.finanz.register.pre"}}
+                <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" class="text-brand-red">{{t "legal.dihk.register"}}</a>
+                {{t "erstinfo.status.finanz.register.post"}}
+            </p>
+            <p><strong>{{t "erstinfo.status.register_label"}}</strong> {{t "legal.finanz.vermittler_nr"}}</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "erstinfo.remuneration.eyebrow") "Title" (t "erstinfo.remuneration.title")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">{{t "erstinfo.remuneration.finanz.body"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "erstinfo.holdings.eyebrow") "Title" (t "erstinfo.holdings.title")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">{{t "erstinfo.holdings.body"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "erstinfo.disputes.eyebrow") "Title" (t "erstinfo.disputes.title")}}
+        <ul class="space-y-5 text-stone-700 max-w-3xl">
+            <li>
+                <strong class="text-stone-900">{{t "erstinfo.disputes.ombudsmann.name"}}</strong><br>
+                {{t "erstinfo.disputes.ombudsmann.address"}}
+            </li>
+            <li>
+                <strong class="text-stone-900">{{t "erstinfo.disputes.eu.name"}}</strong><br>
+                <a href="https://webgate.ec.europa.eu/odr/main/" target="_blank" rel="noopener noreferrer" class="text-brand-red">https://webgate.ec.europa.eu/odr/main/</a>
+            </li>
+        </ul>
+        <p class="mt-6 text-stone-700 text-lg max-w-3xl">
+            {{t "erstinfo.disputes.direct"}}
+            <a href="mailto:{{t "company.email"}}" class="text-brand-red">{{t "company.email"}}</a>
+            · {{t "company.phone"}}
+        </p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "erstinfo.esg.eyebrow") "Title" (t "erstinfo.esg.title")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">{{t "erstinfo.esg.finanz.body"}}</p>
+    </div>
+</section>
+{{end}}

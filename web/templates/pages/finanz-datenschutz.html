@@ -1,0 +1,37 @@
+{{define "title"}}{{t "datenschutz.meta.title" (t "legal.finanz.short")}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "datenschutz.meta.description" (t "legal.finanz.name")}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "datenschutz.hero.eyebrow.finanz") "Title" (t "datenschutz.hero.title") "Subtitle" (t "datenschutz.hero.subtitle" (t "legal.finanz.short")) "Image" "/static/img/versicherungen/wichtige-hinweise.jpg"}}
+
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.usage.title") "Body" (t "datenschutz.finanz.usage.body") "Page" false}}
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "datenschutz.finanz.complaints.title")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">{{t "datenschutz.finanz.complaints.body"}}</p>
+        <p class="mt-4 text-stone-900 text-lg">
+            {{t "datenschutz.hdsb.street"}}, {{t "datenschutz.hdsb.city"}}<br>
+            {{t "impressum.labels.tel"}} {{t "datenschutz.hdsb.phone"}}
+        </p>
+    </div>
+</section>
+
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.scope.title") "Body" (t "datenschutz.finanz.scope.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.terms.title") "Body" (t "datenschutz.finanz.terms.body") "Page" true}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.collect.title") "Body" (t "datenschutz.finanz.collect.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.confidential.title") "Body" (t "datenschutz.finanz.confidential.body") "Page" true}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.security.title") "Body" (t "datenschutz.finanz.security.body") "Page" false}}
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "datenschutz.finanz.rights.title")}}
+        <ul class="space-y-2 text-stone-700 text-lg max-w-3xl">
+            {{range tlist "datenschutz.rights"}}<li>• {{.}}</li>{{end}}
+        </ul>
+    </div>
+</section>
+
+{{template "legal-text-section" dict "Title" (t "datenschutz.finanz.breach.title") "Body" (t "datenschutz.finanz.breach.body") "Page" false}}
+{{template "legal-text-section" dict "Title" (t "datenschutz.cookies.title") "Body" (t "datenschutz.cookies.body") "Page" true}}
+{{end}}

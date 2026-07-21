@@ -1,0 +1,84 @@
+{{define "title"}}{{t "impressum.meta.title" (t "legal.finanz.short")}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "impressum.meta.description" (t "legal.finanz.name")}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "impressum.hero.eyebrow.finanz") "Title" (t "impressum.hero.title") "Subtitle" (t "legal.finanz.tagline") "Image" "/static/img/versicherungen/history.jpeg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.provider")}}
+        {{template "legal-address" dict "Name" (t "legal.finanz.name") "Email" (t "company.email_finanz")}}
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.management")}}
+        <p class="text-stone-900 text-lg">{{t "legal.finanz.management"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.registry")}}
+        <ul class="space-y-3 text-stone-700 text-lg">
+            <li><strong class="text-stone-900">{{t "impressum.labels.court"}}</strong> {{t "legal.finanz.registry"}}</li>
+            <li><strong class="text-stone-900">{{t "impressum.labels.type"}}</strong> {{t "legal.finanz.type"}}</li>
+            <li><strong class="text-stone-900">{{t "impressum.labels.vermittler_nr"}}</strong> {{t "legal.finanz.vermittler_nr"}}</li>
+            <li><strong class="text-stone-900">{{t "impressum.labels.ust_id"}}</strong> {{t "legal.finanz.ust_id"}}</li>
+        </ul>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.authority_finanz")}}
+        <div class="space-y-5 text-stone-700 leading-relaxed text-lg max-w-3xl">
+            <div>
+                <p><strong class="text-stone-900">{{t "impressum.authority.vers_label"}}</strong> {{t "impressum.authority.erlaubnis_nach" (t "legal.finanz.erlaubnis_vers")}}</p>
+                <p class="text-base">{{t "impressum.authority.aufsicht" (t "legal.finanz.aufsicht_vers")}}</p>
+            </div>
+            <div>
+                <p><strong class="text-stone-900">{{t "impressum.authority.finanz_label"}}</strong> {{t "impressum.authority.erlaubnis_nach" (t "legal.finanz.erlaubnis_finanz")}}</p>
+                <p class="text-base">{{t "impressum.authority.aufsicht" (t "legal.finanz.aufsicht_finanz")}}</p>
+            </div>
+            <div class="pt-4 border-t border-stone-200">
+                <p>
+                    <strong class="text-stone-900">{{t "legal.dihk.name"}}</strong><br>
+                    {{t "legal.dihk.street"}}, {{t "legal.dihk.city"}}<br>
+                    {{t "impressum.labels.tel"}} {{t "legal.dihk.phone"}}<br>
+                    {{t "impressum.labels.register"}} <a href="https://www.vermittlerregister.info" target="_blank" rel="noopener noreferrer" class="text-brand-red">{{t "legal.dihk.register"}}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.editor")}}
+        <p class="text-stone-700 text-lg">{{t "legal.finanz.editor"}} {{t "impressum.editor_suffix"}}</p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.odr")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">
+            {{t "impressum.odr.pre"}}
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" class="text-brand-red">{{t "impressum.odr.link"}}</a>{{t "impressum.odr.post"}}
+        </p>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" (t "impressum.sections.liability")}}
+        <div class="space-y-4 text-stone-700 leading-relaxed text-lg max-w-3xl">
+            <p>{{t "impressum.liability.1"}}</p>
+            <p>{{t "impressum.external_links"}}</p>
+            <p>{{t "impressum.liability.2"}}</p>
+        </div>
+    </div>
+</section>
+{{end}}

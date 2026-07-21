@@ -1,0 +1,7 @@
+{{define "link-card"}}
+<a href="{{.Href}}" class="group block bg-white {{if .Big}}p-10{{else}}p-7{{end}} rounded-2xl shadow-card hover:shadow-card-hover transition border-t-2 border-brand-red">
+    <h3 class="font-bold tracking-tight {{if .Big}}text-3xl mb-4{{else}}text-xl mb-3{{end}} text-stone-900">{{.Title}}</h3>
+    <p class="text-stone-700 leading-relaxed{{if not .Big}} text-[15px]{{end}}">{{.Text}}</p>
+    <p class="{{if .Big}}mt-6{{else}}mt-5{{end}} text-brand-red font-semibold text-sm group-hover:translate-x-1 transition-transform">{{t "actions.learn_more"}}</p>
+</a>
+{{end}}

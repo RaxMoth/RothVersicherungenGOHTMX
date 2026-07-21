@@ -1,6 +1,6 @@
-# Eumel — Go + HTMX template
+# Roth Versicherungen — Go + HTMX
 
-Base template for server-rendered Go websites: stdlib router + `html/template`, HTMX (vendored in `web/static/js/`), Tailwind v4 standalone CLI, SQLite (modernc, no CGO), JSON i18n.
+Server-rendered website for Roth Versicherungen / Roth Finanz (Langen), built on the Eumel template: stdlib router + `html/template`, HTMX (vendored in `web/static/js/`), Tailwind v4 standalone CLI, SQLite (modernc, no CGO), JSON i18n.
 
 ## Commands
 
@@ -10,10 +10,10 @@ Base template for server-rendered Go websites: stdlib router + `html/template`, 
 
 ## Conventions
 
-- **Never hardcode UI text** in templates or handlers. Every string goes into ALL `locales/*.json` files (flat JSON, dot keys like `nav.home`) and is used via `{{t "key"}}` in templates. Args make it a Sprintf: `{{t "todos.count" 5}}`.
-- Pages live in `web/templates/pages/` and define a `content` block rendered inside `layouts/base.html` via `View.Render(w, r, status, "name.html", data)`. Page data is accessed as `.Data.X` in templates.
-- HTMX endpoints render partials from `web/templates/partials/` via `View.RenderPartial`; mutations re-render the affected partial and the client swaps it with `hx-target`/`hx-swap="outerHTML"`.
-- Routes are registered in `internal/server/server.go` using Go 1.22+ patterns (`GET /path/{id}`).
-- Migrations: sequential `internal/db/migrations/NNNN_name.sql`, auto-applied at startup. Query functions live in `internal/db/` as plain functions taking `*sql.DB`.
+- **Never hardcode UI text** in templates or handlers. Every string goes into `locales/de.json` (flat JSON, dot keys like `nav.team`) and is used via `{{t "key"}}` in templates. Args make it a Sprintf: `{{t "footer.copyright" year}}`. Lists use numbered keys (`x.items.1`, `x.items.2`, …) iterated with `{{range tlist "x.items"}}`.
+- The site is German-only; `DEFAULT_LANG` defaults to `de`.
+- Pages live in `web/templates/pages/` and define a `content` block (plus optional `title`/`description` blocks) rendered inside `layouts/base.html`. All pages are static content: routes register with `h.Page("name.html")` in `internal/server/server.go` (Go 1.22+ patterns).
+- Shared building blocks are partials in `web/templates/partials/`: `page-hero`, `section-head`, `cta`, `link-card`, `nav`, `footer`, `legal-address`, `legal-text-section`. They take named parameters via the `dict` template function. HTMX endpoints (none yet) would render partials via `View.RenderPartial`.
+- Brand theme (colors `brand-red`/`brand-page`/…, `shadow-card`, `rounded-4xl`, Inter font) is defined in `@theme` in `web/static/css/input.css`. Header dropdowns/mobile menu are progressive enhancement in `web/static/js/nav.js`.
+- Migrations: sequential `internal/db/migrations/NNNN_name.sql`, auto-applied at startup. The DB is currently unused (0001 is a placeholder); query functions go in `internal/db/` as plain functions taking `*sql.DB`.
 - Config is env-vars only (`internal/config`); defaults must keep the server runnable with zero setup.
-- The todo feature (handlers/todos.go, db/todos.go, partials/todo-list.html, migration 0001) is demo code meant to be replaced in real projects.

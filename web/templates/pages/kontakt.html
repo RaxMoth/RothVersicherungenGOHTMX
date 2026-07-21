@@ -1,0 +1,43 @@
+{{define "title"}}{{t "kontakt.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "kontakt.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "kontakt.hero.eyebrow") "Title" (t "kontakt.hero.title") "Image" "/static/img/kontakt/hero.jpg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "kontakt.contact.eyebrow") "Title" (t "kontakt.contact.title")}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-4xl mb-10">{{t "kontakt.contact.intro"}}</p>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="space-y-5 text-stone-700">
+                <p class="font-bold tracking-tight text-xl text-stone-900">
+                    {{t "company.name"}}<br>
+                    {{t "company.finanz_name"}}
+                </p>
+                <p>
+                    {{t "company.street"}}<br>
+                    {{t "company.city"}}
+                </p>
+                <div class="space-y-1">
+                    <p>{{t "kontakt.labels.fon"}} <a href="tel:{{t "company.phone_tel"}}" class="text-brand-red font-semibold">{{t "company.phone"}}</a></p>
+                    <p>{{t "kontakt.labels.fax"}} {{t "company.fax"}}</p>
+                    <p>{{t "kontakt.labels.email"}} <a href="mailto:{{t "company.email"}}" class="text-brand-red">{{t "company.email"}}</a></p>
+                    <p><a href="mailto:{{t "company.email_finanz"}}" class="text-brand-red">{{t "company.email_finanz"}}</a></p>
+                </div>
+                <div class="pt-4 border-t border-stone-200">
+                    <p class="uppercase tracking-wider text-xs text-brand-red font-semibold mb-2">{{t "kontakt.contact.hours_label"}}</p>
+                    <p>{{t "kontakt.contact.hours"}}</p>
+                    <p class="text-sm text-stone-500 mt-1">{{t "kontakt.contact.hours_extra"}}</p>
+                </div>
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-card">
+                <iframe title="{{t "kontakt.contact.map_title"}}"
+                        src="https://maps.google.com/maps?q=Bahnstra%C3%9Fe%2095%2C%2063225%20Langen&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        class="w-full h-96 border-0"
+                        loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+{{end}}

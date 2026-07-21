@@ -1,0 +1,10 @@
+{{define "section-head"}}
+<div class="mb-12 max-w-3xl">
+    {{if .Eyebrow}}
+    <p class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-semibold mb-5 {{if .Dark}}bg-white/15 text-white{{else}}bg-brand-red/10 text-brand-red{{end}}">{{.Eyebrow}}</p>
+    {{end}}
+    {{if .Title}}
+    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] {{if .Dark}}text-white{{else}}text-stone-900{{end}}">{{.Title}}</h2>
+    {{end}}
+</div>
+{{end}}

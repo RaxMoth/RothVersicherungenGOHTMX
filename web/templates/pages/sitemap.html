@@ -1,0 +1,56 @@
+{{define "title"}}{{t "sitemap.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "sitemap.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "sitemap.hero.eyebrow") "Title" (t "sitemap.hero.title")}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-10">
+            <nav aria-label="{{t "sitemap.sections.haupt"}}">
+                <h2 class="font-bold tracking-tight text-2xl text-stone-900 mb-4">{{t "sitemap.sections.haupt"}}</h2>
+                <div class="w-10 h-[2px] bg-brand-red mb-5"></div>
+                <ul class="space-y-2 list-none">
+                    {{template "sitemap-link" dict "Href" "/" "Label" (t "nav.welcome")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen" "Label" (t "nav.roth_versicherungen")}}
+                    {{template "sitemap-link" dict "Href" "/roth-finanz" "Label" (t "nav.roth_finanz")}}
+                    {{template "sitemap-link" dict "Href" "/team" "Label" (t "nav.team")}}
+                    {{template "sitemap-link" dict "Href" "/kontakt-anfahrt" "Label" (t "nav.kontakt")}}
+                </ul>
+            </nav>
+            <nav aria-label="{{t "nav.roth_versicherungen"}}">
+                <h2 class="font-bold tracking-tight text-2xl text-stone-900 mb-4">{{t "nav.roth_versicherungen"}}</h2>
+                <div class="w-10 h-[2px] bg-brand-red mb-5"></div>
+                <ul class="space-y-2 list-none">
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/firmenkunden" "Label" (t "nav.firmenkunden")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/firmenkunden/cyber-police" "Label" (t "nav.cyber")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/privatkunden" "Label" (t "nav.privatkunden")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/privatkunden/tierkrankenversicherung" "Label" (t "nav.tier")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/wichtige-hinweise" "Label" (t "nav.hinweise")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/jobs" "Label" (t "nav.jobs")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/erstinformation" "Label" (t "nav.erstinformation")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/datenschutz" "Label" (t "nav.datenschutz")}}
+                    {{template "sitemap-link" dict "Href" "/roth-versicherungen/impressum" "Label" (t "nav.impressum")}}
+                </ul>
+            </nav>
+            <nav aria-label="{{t "nav.roth_finanz"}}">
+                <h2 class="font-bold tracking-tight text-2xl text-stone-900 mb-4">{{t "nav.roth_finanz"}}</h2>
+                <div class="w-10 h-[2px] bg-brand-red mb-5"></div>
+                <ul class="space-y-2 list-none">
+                    {{template "sitemap-link" dict "Href" "/roth-finanz/altersversorgung" "Label" (t "nav.altersversorgung")}}
+                    {{template "sitemap-link" dict "Href" "/roth-finanz/sterbegeldversicherung" "Label" (t "nav.sterbegeld")}}
+                    {{template "sitemap-link" dict "Href" "/roth-finanz/erstinformation" "Label" (t "nav.erstinformation")}}
+                    {{template "sitemap-link" dict "Href" "/roth-finanz/datenschutz" "Label" (t "nav.datenschutz")}}
+                    {{template "sitemap-link" dict "Href" "/roth-finanz/impressum" "Label" (t "nav.impressum")}}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+{{end}}
+
+{{define "sitemap-link"}}
+<li>
+    <a href="{{.Href}}" class="text-stone-700 hover:text-brand-red transition underline-offset-2 hover:underline">{{.Label}}</a>
+</li>
+{{end}}

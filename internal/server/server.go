@@ -18,14 +18,31 @@ func New(cfg *config.Config, database *sql.DB, v *view.View, tr *i18n.Translator
 
 	mux := http.NewServeMux()
 
-	// Pages
-	mux.HandleFunc("GET /{$}", h.Home)
-	mux.HandleFunc("GET /about", h.About)
+	// Pages — every route renders a static page template; all content
+	// comes from locales/de.json.
+	mux.HandleFunc("GET /{$}", h.Page("home.html"))
 
-	// HTMX demo endpoints (todos)
-	mux.HandleFunc("POST /todos", h.CreateTodo)
-	mux.HandleFunc("POST /todos/{id}/toggle", h.ToggleTodo)
-	mux.HandleFunc("DELETE /todos/{id}", h.DeleteTodo)
+	mux.HandleFunc("GET /roth-versicherungen", h.Page("versicherungen.html"))
+	mux.HandleFunc("GET /roth-versicherungen/firmenkunden", h.Page("firmenkunden.html"))
+	mux.HandleFunc("GET /roth-versicherungen/firmenkunden/cyber-police", h.Page("cyber.html"))
+	mux.HandleFunc("GET /roth-versicherungen/privatkunden", h.Page("privatkunden.html"))
+	mux.HandleFunc("GET /roth-versicherungen/privatkunden/tierkrankenversicherung", h.Page("tier.html"))
+	mux.HandleFunc("GET /roth-versicherungen/wichtige-hinweise", h.Page("hinweise.html"))
+	mux.HandleFunc("GET /roth-versicherungen/jobs", h.Page("jobs.html"))
+	mux.HandleFunc("GET /roth-versicherungen/erstinformation", h.Page("vers-erstinformation.html"))
+	mux.HandleFunc("GET /roth-versicherungen/datenschutz", h.Page("vers-datenschutz.html"))
+	mux.HandleFunc("GET /roth-versicherungen/impressum", h.Page("vers-impressum.html"))
+
+	mux.HandleFunc("GET /roth-finanz", h.Page("finanz.html"))
+	mux.HandleFunc("GET /roth-finanz/altersversorgung", h.Page("altersversorgung.html"))
+	mux.HandleFunc("GET /roth-finanz/sterbegeldversicherung", h.Page("sterbegeld.html"))
+	mux.HandleFunc("GET /roth-finanz/erstinformation", h.Page("finanz-erstinformation.html"))
+	mux.HandleFunc("GET /roth-finanz/datenschutz", h.Page("finanz-datenschutz.html"))
+	mux.HandleFunc("GET /roth-finanz/impressum", h.Page("finanz-impressum.html"))
+
+	mux.HandleFunc("GET /team", h.Page("team.html"))
+	mux.HandleFunc("GET /kontakt-anfahrt", h.Page("kontakt.html"))
+	mux.HandleFunc("GET /sitemap", h.Page("sitemap.html"))
 
 	// Static assets: from disk in dev (live reload), embedded in prod.
 	var staticFS http.FileSystem

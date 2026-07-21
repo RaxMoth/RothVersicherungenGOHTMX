@@ -74,6 +74,24 @@ func (t *Translator) T(lang, key string, args ...any) string {
 	return s
 }
 
+// List returns the strings stored under key.1, key.2, ... in order,
+// stopping at the first missing index. Lets templates iterate over
+// translated lists without knowing their length.
+func (t *Translator) List(lang, key string) []string {
+	var out []string
+	for i := 1; ; i++ {
+		k := fmt.Sprintf("%s.%d", key, i)
+		s, ok := t.langs[lang][k]
+		if !ok {
+			s, ok = t.langs[t.defaultLang][k]
+		}
+		if !ok {
+			return out
+		}
+		out = append(out, s)
+	}
+}
+
 // Languages returns all loaded language codes, sorted.
 func (t *Translator) Languages() []string {
 	out := make([]string, 0, len(t.langs))

@@ -1,0 +1,22 @@
+{{define "title"}}{{t "hinweise.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "hinweise.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "hinweise.hero.eyebrow") "Title" (t "hinweise.hero.title") "Subtitle" (t "hinweise.hero.subtitle") "Image" "/static/img/versicherungen/wichtige-hinweise.jpg"}}
+
+{{range $idx, $blockTitle := tlist "hinweise.blocks.titles"}}
+<section class="py-16 md:py-24 px-6 {{if eq (mod $idx 2) 0}}bg-white{{else}}bg-brand-page{{end}}">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Title" $blockTitle}}
+        <ul class="space-y-4 text-stone-700 leading-relaxed max-w-4xl">
+            {{range tlist (printf "hinweise.block%d.items" (add $idx 1))}}
+            <li class="flex gap-4 border-b border-stone-200 pb-4 last:border-b-0">
+                <span class="text-brand-red font-bold mt-1">•</span>
+                <span>{{.}}</span>
+            </li>
+            {{end}}
+        </ul>
+    </div>
+</section>
+{{end}}
+{{end}}

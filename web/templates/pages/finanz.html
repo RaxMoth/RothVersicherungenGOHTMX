@@ -1,0 +1,30 @@
+{{define "title"}}{{t "finanz.meta.title"}} | {{t "site.title"}}{{end}}
+{{define "description"}}{{t "finanz.meta.description"}}{{end}}
+
+{{define "content"}}
+{{template "page-hero" dict "Eyebrow" (t "finanz.hero.eyebrow") "Title" (t "finanz.hero.title") "Image" "/static/img/finanz/hero.jpg"}}
+
+<section class="py-16 md:py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "finanz.intro.eyebrow") "Title" (t "finanz.intro.title")}}
+        <div class="grid md:grid-cols-3 gap-10 items-start">
+            <div class="md:col-span-2 space-y-6 text-stone-700 text-lg leading-relaxed">
+                {{range tlist "finanz.intro.paragraphs"}}<p>{{.}}</p>{{end}}
+            </div>
+            <img src="/static/img/logos/roth-finanz.png" alt="{{t "finanz.intro.logo_alt"}}" class="w-full h-auto" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 px-6 bg-brand-page">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" (t "finanz.services.eyebrow") "Title" (t "finanz.services.title")}}
+        <div class="grid md:grid-cols-2 gap-6">
+            {{template "link-card" dict "Big" true "Href" "/roth-finanz/altersversorgung" "Title" (t "finanz.services.alters.title") "Text" (t "finanz.services.alters.text")}}
+            {{template "link-card" dict "Big" true "Href" "/roth-finanz/sterbegeldversicherung" "Title" (t "finanz.services.sterbegeld.title") "Text" (t "finanz.services.sterbegeld.text")}}
+        </div>
+    </div>
+</section>
+
+{{template "cta" .}}
+{{end}}

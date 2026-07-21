@@ -1,0 +1,19 @@
+{{define "legal-address"}}
+<p class="text-stone-700 leading-relaxed text-lg">
+    <strong class="font-bold tracking-tight text-stone-900 text-xl">{{.Name}}</strong><br>
+    {{t "company.street"}}<br>
+    {{t "company.city"}}<br>
+    {{t "impressum.labels.tel"}} {{t "company.phone"}}<br>
+    {{t "impressum.labels.fax"}} {{t "company.fax"}}<br>
+    {{t "impressum.labels.email"}} <a href="mailto:{{.Email}}" class="text-brand-red">{{.Email}}</a>
+</p>
+{{end}}
+
+{{define "legal-text-section"}}
+<section class="py-16 md:py-24 px-6 {{if .Page}}bg-brand-page{{else}}bg-white{{end}}">
+    <div class="max-w-6xl mx-auto">
+        {{template "section-head" dict "Eyebrow" .Eyebrow "Title" .Title}}
+        <p class="text-stone-700 leading-relaxed text-lg max-w-3xl">{{.Body}}</p>
+    </div>
+</section>
+{{end}}
