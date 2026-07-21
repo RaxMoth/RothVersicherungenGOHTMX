@@ -1,0 +1,19 @@
+{{define "base"}}<!doctype html>
+<html lang="{{.Lang}}" class="h-full">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{block "title" .}}{{t "site.title"}}{{end}}</title>
+    <meta name="description" content="{{t "site.description"}}">
+    <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/css/output.css">
+    <script src="/static/js/htmx.min.js" defer></script>
+</head>
+<body class="flex min-h-full flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+    {{template "nav" .}}
+    <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-10">
+        {{block "content" .}}{{end}}
+    </main>
+    {{template "footer" .}}
+</body>
+</html>{{end}}

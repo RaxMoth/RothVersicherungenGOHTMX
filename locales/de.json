@@ -1,0 +1,27 @@
+{
+  "site.title": "Eumel",
+  "site.description": "Ein Go + HTMX Website-Template.",
+
+  "nav.home": "Startseite",
+  "nav.about": "Über",
+
+  "home.heading": "Willkommen bei Eumel",
+  "home.intro": "Das ist dein Go + HTMX Basis-Template: Stdlib-Routing, servergerenderte Templates, Tailwind CSS, SQLite und mehrsprachige Strings — alles verdrahtet und bereit zum Loslegen.",
+
+  "todos.heading": "HTMX-Demo: Todos",
+  "todos.placeholder": "Was steht an?",
+  "todos.add": "Hinzufügen",
+  "todos.empty": "Noch nichts da — füge oben dein erstes Todo hinzu.",
+  "todos.delete": "Löschen",
+
+  "about.heading": "Über",
+  "about.body": "Ersetze diese Seite mit deinem eigenen Inhalt. Alle Texte liegen im locales-Ordner, damit Templates keine fest verdrahteten Strings enthalten.",
+
+  "error.back_home": "Zurück zur Startseite",
+  "error.404.title": "Seite nicht gefunden",
+  "error.404.body": "Die gesuchte Seite existiert nicht.",
+  "error.500.title": "Etwas ist schiefgelaufen",
+  "error.500.body": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.",
+
+  "footer.text": "Gebaut mit Go, HTMX und Tailwind CSS."
+}

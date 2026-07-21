@@ -1,0 +1,21 @@
+{{define "nav"}}
+<header class="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+    <nav class="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
+        <a href="/" class="text-lg font-semibold tracking-tight">{{t "site.title"}}</a>
+        <div class="flex items-center gap-6 text-sm">
+            <a href="/" class="hover:underline {{if eq .Path "/"}}font-semibold{{end}}">{{t "nav.home"}}</a>
+            <a href="/about" class="hover:underline {{if eq .Path "/about"}}font-semibold{{end}}">{{t "nav.about"}}</a>
+            <div class="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                {{$current := .Lang}}{{$path := .Path}}
+                {{range .Languages}}
+                    {{if eq . $current}}
+                        <span class="font-semibold uppercase text-zinc-900 dark:text-zinc-100">{{.}}</span>
+                    {{else}}
+                        <a href="{{$path}}?lang={{.}}" class="uppercase hover:underline">{{.}}</a>
+                    {{end}}
+                {{end}}
+            </div>
+        </div>
+    </nav>
+</header>
+{{end}}

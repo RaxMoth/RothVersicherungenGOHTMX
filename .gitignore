@@ -1,0 +1,11 @@
+# Build artifacts
+bin/
+
+# Local data (SQLite database)
+data/
+
+# Environment files
+.env
+
+# OS noise
+.DS_Store

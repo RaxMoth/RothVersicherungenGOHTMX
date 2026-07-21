@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Tell Tailwind where to scan for class names (relative to this file). */
+@source "../../templates";
+
+/* Project-wide custom styles go below. */
